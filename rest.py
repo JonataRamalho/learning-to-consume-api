@@ -9,11 +9,18 @@ def check(response):
         if response.status_code != 200:
             raise ValueError("\nUsuário não encontrado!\n")
         else:
-            print(response.json())
+            show(response.json())
     except ValueError as err:
         print(err)
 
-print('\n\n====== Buscar usuário do GitHub ======')
+def show(userData):
+    print('\n\n===== Usuário Encontrado =====\n')
+    print('\nNome: {}'.format(userData['name']))
+    print('{} \n'.format(userData['bio']))
+    print('Repositório público: {} \n'.format(userData['public_repos']))
+    print('Seguidores: {} \n\n'.format(userData['followers']))
+
+print('\n\n====== Buscar usuário do GitHub ======\n')
 
 username = input('Digite o nome: ')
 
