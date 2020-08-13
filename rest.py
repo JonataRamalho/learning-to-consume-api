@@ -1,5 +1,16 @@
 import requests
 
+def main():
+    print('\n\n====== Buscar usuário do GitHub ======\n')
+
+    username = input('Digite o nome: ')
+
+    response = search(username)
+
+    check(response)
+
+    analyzeOption()  
+
 def search(username):
     
     return requests.get('https://api.github.com/users/{}'.format(username))
@@ -20,10 +31,25 @@ def show(userData):
     print('Repositório público: {} \n'.format(userData['public_repos']))
     print('Seguidores: {} \n\n'.format(userData['followers']))
 
-print('\n\n====== Buscar usuário do GitHub ======\n')
+def analyzeOption():
+    try:
+        option = int(input('Deseja buscar outro usuário?\n 1. Sim\n 2. Não\n'))
+        
+        choose(option)
 
-username = input('Digite o nome: ')
+    except:
+        print('\nErro, escolha 1 ou 2.\n')
+        
+        analyzeOption()
 
-response = search(username)
+def choose(option):
+    if option == 1: 
+        main()
+    elif option == 2: 
+        print('\nSaindo... \n')
+    else: 
+        print('\nOpção errada!\n')
+        analyzeOption()
 
-check(response)
+if __name__ == "__main__":
+    main()
